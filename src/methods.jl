@@ -111,7 +111,7 @@ point_conic_eq(p::CartesianIndex) = point_conic_eq(p.I...)
 
 function inside_ellipse(el::Ellipse, position)
     x, y = Tuple(position)
-    return [x^2, x * y, y^2, x, y, 1]' * conic(el) <= 0
+    return [x^2, x * y, y^2, x, y, 1]' * conic(el) * sign(conic(el)[1]) <= 0
 end
 
 function mask_ellipse(img, el::Ellipse)
