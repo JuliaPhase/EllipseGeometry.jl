@@ -1,0 +1,5 @@
+{
+    "editor.defaultFormatter": "julialang.language-julia",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true
+}

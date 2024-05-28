@@ -7,8 +7,8 @@ function Makie.convert_arguments(::Type{<:AbstractPlot}, el::Ellipse)
     return (map(Point2f, zip(EllipseGeometry.getellipsepoints(el)...)),)
 end
 
-function add_axes!(el::Ellipse)
-    return arrows!(EllipseGeometry.getellipseaxes(el)...; color=[:red, :green])
+function add_axes!(el::Ellipse; kwargs...)
+    return arrows!(EllipseGeometry.getellipseaxes(el)...; color=[:red, :green], kwargs...)
 end
 
 export add_axes!

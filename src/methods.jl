@@ -81,7 +81,7 @@ getellipseaxes(el::Ellipse) = getellipseaxes(center(el)..., axes(el)..., angle(e
 """
     add_axes!(el::Ellipse)
 
-Function is active when Makie is loaded. Drwas axes of the `el`.
+Function is active when Makie is loaded. Draws axes of the `el`.
 """
 function add_axes!() end
 

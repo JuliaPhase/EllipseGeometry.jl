@@ -31,6 +31,10 @@ function Ellipse(con::AbstractVector{T}) where {T}
     return Ellipse(SVector{6,T}(con), Point2{T}(center), SVector{2,T}(axes), T(angle))
 end
 
+function Ellipse(centre, axes, angle)
+    return Ellipse(axes_to_conic(centre, axes, angle), centre, axes, angle)
+end
+
 Ellipse() = Ellipse(Float32[1.0, 0.0, 1.0, 0.0, 0.0, -1.0])
 
 function show(io::IO, el::Ellipse)
