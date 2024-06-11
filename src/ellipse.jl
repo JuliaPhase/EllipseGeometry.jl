@@ -56,7 +56,8 @@ function conic!(el::Ellipse, coeffs)
 end
 
 function axes!(el::Ellipse, ax)
-    el._axes = sort!([ax...]; rev=true)
+    # el._axes = sort!([ax...]; rev=true)
+    el._axes = [ax...]
     el._conic = axes_to_conic(el._center, el._axes, el._angle)
     return el
 end
@@ -84,3 +85,8 @@ function to_el_coord(x, y, el::Ellipse)
 end
 
 to_el_coord(c::Tuple, el::Ellipse) = to_el_coord(c..., el)
+
+copy(el::Ellipse) = Ellipse(conic(el))
+
+scale!(el::Ellipse, c) = axes!(el, c * axes(el))
+scale(el::Ellipse, c) = axes!(copy(el), c * axes(el))

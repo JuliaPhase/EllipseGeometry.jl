@@ -4,7 +4,7 @@ using GeometryBasics
 using StaticArrays
 using LinearAlgebra: dot
 
-import Base: show, angle
+import Base: show, angle, copy
 
 include("ellipse.jl")
 include("methods.jl")
@@ -21,6 +21,8 @@ export Ellipse,
     fit_ellipse,
     inside_ellipse,
     mask_ellipse,
-    to_el_coord
+    to_el_coord,
+    scale,
+    scale!
 
 end

@@ -19,26 +19,32 @@ function conic_to_axes(coeffs, normalise=true)
     a = -sqrt(term1 * (A + C + sqrt((A - C)^2 + B^2))) / disc
     b = -sqrt(term1 * (A + C - sqrt((A - C)^2 + B^2))) / disc
 
-    if A <= C
-        if B == 0
-            phi_b = 0
-        else
-            phi_b = atan(B, (A - C)) / 2
-        end
-    else
-        if B == 0
-            phi_b = π / 2
-        else
-            phi_b = atan(B, (A - C)) / 2 - π / 2
-        end
-    end
+    # if A <= C
+    #     if B == 0
+    #         phi_b = 0
+    #     else
+    #         phi_b = atan(B / (A - C)) / 2
+    #     end
+    # else
+    #     if B == 0
+    #         phi_b = π / 2
+    #     else
+    #         phi_b = atan(B / (A - C)) / 2 - π / 2
+    #     end
+    # end
+    phi_b = atan(-B, C - A) / 2
 
     return (x0, y0), (a, b), phi_b
 end
 
 function axes_to_conic(centre, axes, angle; normalise=true)
     x0, y0 = centre
-    a, b = sort([axes...]; rev=true)
+    # a, b = sort([axes...]; rev=true) # this gives an error
+    a, b = axes
+    # if b < a
+    #     b, a = axes
+    #     angle = angle + π / 2
+    # end
 
     A = (a * sin(angle))^2 + (b * cos(angle))^2
     B = 2 * (b^2 - a^2) * sin(angle) * cos(angle)
