@@ -32,7 +32,7 @@ function Ellipse(con::AbstractVector{T}) where {T}
 end
 
 function Ellipse(centre, axes, angle)
-    return Ellipse(axes_to_conic(centre, axes, angle), centre, axes, angle)
+    return Ellipse(axes_to_conic(centre, axes, angle))
 end
 
 Ellipse() = Ellipse(Float32[1.0, 0.0, 1.0, 0.0, 0.0, -1.0])
