@@ -1,6 +1,8 @@
 
 # Not yet, need to to think about the rotation/axes representation
 # Just limit to needed functionality of 2D case
+# TODO just add an orthogonal matrix as both the semi-axes and rotation
+#
 # """
 #     HyperEllipsoid{N, T}
 
@@ -90,3 +92,11 @@ copy(el::Ellipse) = Ellipse(conic(el))
 
 scale!(el::Ellipse, c) = axes!(el, c * axes(el))
 scale(el::Ellipse, c) = axes!(copy(el), c * axes(el))
+
+function rotate_with_image!(ellipse, dims::Tuple)
+    xc, yc = center(ellipse)
+    EllipseGeometry.center!(ellipse, (dims[1] + 1 - yc, xc))
+    return angle!(ellipse, angle(ellipse) + π / 2)
+end
+
+rotate_with_image!(ellipse, image::Matrix) = rotate_with_image!(ellipse, size(image))
