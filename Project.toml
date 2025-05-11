@@ -19,6 +19,7 @@ EllipseGLMakieExt = "GLMakie"
 EllipseMakieExt = "Makie"
 
 [compat]
+StaticArrays = "1"
 julia = "1.9"
 
 [extras]
