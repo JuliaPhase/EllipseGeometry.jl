@@ -4,9 +4,9 @@ Part of the [Phase.jl](https://github.com/JuliaPhase/Phase.jl) ecosystem.
 
 <!-- DOI badge: add after first Zenodo release -->
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://olejorik.github.io/EllipseGeometry.jl/stable/)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://olejorik.github.io/EllipseGeometry.jl/dev/)
-[![Build Status](https://github.com/olejorik/EllipseGeometry.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/olejorik/EllipseGeometry.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://juliaphase.github.io/EllipseGeometry.jl/stable/)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://juliaphase.github.io/EllipseGeometry.jl/dev/)
+[![Build Status](https://github.com/JuliaPhase/EllipseGeometry.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaPhase/EllipseGeometry.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Code Style: Blue](https://img.shields.io/badge/code%20style-blue-4495d1.svg)](https://github.com/invenia/BlueStyle)
 
 ## Overview

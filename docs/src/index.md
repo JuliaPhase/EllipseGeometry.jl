@@ -4,7 +4,7 @@ CurrentModule = EllipseGeometry
 
 # EllipseGeometry
 
-Documentation for [EllipseGeometry](https://github.com/olejorik/EllipseGeometry.jl).
+Documentation for [EllipseGeometry](https://github.com/JuliaPhase/EllipseGeometry.jl).
 
 ```@index
 ```

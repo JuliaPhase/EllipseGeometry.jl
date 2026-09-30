@@ -6,11 +6,11 @@ DocMeta.setdocmeta!(EllipseGeometry, :DocTestSetup, :(using EllipseGeometry); re
 makedocs(;
     modules=[EllipseGeometry],
     authors="Oleg Soloviev <oleg.soloviev@gmail.com> and contributors",
-    repo="https://github.com/olejorik/EllipseGeometry.jl/blob/{commit}{path}#{line}",
+    repo="https://github.com/JuliaPhase/EllipseGeometry.jl/blob/{commit}{path}#{line}",
     sitename="EllipseGeometry.jl",
     format=Documenter.HTML(;
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical="https://olejorik.github.io/EllipseGeometry.jl",
+        canonical="https://juliaphase.github.io/EllipseGeometry.jl",
         edit_link="main",
         assets=String[],
     ),
@@ -20,6 +20,6 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/olejorik/EllipseGeometry.jl",
+    repo="github.com/JuliaPhase/EllipseGeometry.jl",
     devbranch="main",
 )
