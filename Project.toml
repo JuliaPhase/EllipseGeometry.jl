@@ -1,7 +1,7 @@
 name = "EllipseGeometry"
 uuid = "56405771-b37b-4c45-a787-cc0a2fd6b078"
 authors = ["Oleg Soloviev <oleg.soloviev@gmail.com> and contributors"]
-version = "1.0.0-DEV"
+version = "0.1.0"
 
 [deps]
 GeometryBasics = "5c1252a2-5f33-56bf-86c9-59e7332b4326"

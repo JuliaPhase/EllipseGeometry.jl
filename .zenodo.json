@@ -1,0 +1,26 @@
+{
+  "title": "EllipseGeometry.jl",
+  "upload_type": "software",
+  "description": "<p>Julia package for basic ellipse geometry: representing an ellipse by its centre, axes and orientation, testing whether a point is inside, and transforming ellipses together with images.</p>",
+  "creators": [
+    {
+      "name": "Soloviev, Oleg",
+      "affiliation": "Flexible Optical B.V. (OKO Technologies)",
+      "orcid": "0000-0003-3761-9192"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "version": "0.1.0",
+  "keywords": [
+    "ellipse",
+    "geometry",
+    "image processing",
+    "Julia"
+  ],
+  "grants": [
+    {
+      "id": "10.13039/501100000780::101111948"
+    }
+  ]
+}

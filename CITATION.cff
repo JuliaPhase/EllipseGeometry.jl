@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+title: "EllipseGeometry.jl"
+message: "If you use this software, please cite it using the metadata from this file."
+type: software
+authors:
+  - family-names: "Soloviev"
+    given-names: "Oleg"
+    email: "oleg.soloviev@gmail.com"
+    orcid: "https://orcid.org/0000-0003-3761-9192"
+    affiliation: "Flexible Optical B.V. (OKO Technologies)"
+abstract: "Julia package for basic ellipse geometry: representing an ellipse by its centre, axes and orientation, testing whether a point is inside, and transforming ellipses together with images."
+keywords:
+  - "ellipse"
+  - "geometry"
+  - "image processing"
+  - "Julia"
+license: MIT
+repository-code: "https://github.com/olejorik/EllipseGeometry.jl"
+version: "0.1.0"
