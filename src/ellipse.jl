@@ -76,6 +76,12 @@ function angle!(el::Ellipse, θ)
     return el
 end
 
+function rotate!(el::Ellipse, θ)
+    el._angle += θ
+    el._conic = axes_to_conic(el._center, el._axes, el._angle)
+    return el
+end
+
 function to_el_coord(x, y, el::Ellipse)
     c = center(el)
     lx, ly = axes(el)
@@ -93,6 +99,11 @@ copy(el::Ellipse) = Ellipse(conic(el))
 scale!(el::Ellipse, c) = axes!(el, c * axes(el))
 scale(el::Ellipse, c) = axes!(copy(el), c * axes(el))
 
+"""
+    rotate_with_image!(ellipse, dims::Tuple)
+
+Rotate the ellipse by 90 degrees counter-clockwise with respect to the image dimensions `dims`. If an image is provided instead of dimensions, the size of the image is used.
+"""
 function rotate_with_image!(ellipse, dims::Tuple)
     xc, yc = center(ellipse)
     EllipseGeometry.center!(ellipse, (dims[1] + 1 - yc, xc))
@@ -100,3 +111,28 @@ function rotate_with_image!(ellipse, dims::Tuple)
 end
 
 rotate_with_image!(ellipse, image::Matrix) = rotate_with_image!(ellipse, size(image))
+
+"""
+    flip_with_image!(ellipse, dims::Tuple, flipaxis=:x)
+
+Flip the ellipse with respect to the image dimensions `dims`. The `flipaxis` can be `:x` or `:y`.
+If an image is provided instead of dimensions, the size of the image is used.
+"""
+function flip_with_image!(ellipse, dims::Tuple, flipaxis=:x)
+    xc, yc = center(ellipse) # x is always the first coordinate, also for the image
+    if flipaxis == :x
+        EllipseGeometry.center!(ellipse, (dims[1] + 1 - xc, yc))
+        return angle!(ellipse, π - angle(ellipse))
+    elseif flipaxis == :y
+        EllipseGeometry.center!(ellipse, (xc, dims[2] + 1 - yc))
+        return angle!(ellipse, -angle(ellipse))
+    else
+        error("flipaxis must be :x or :y")
+    end
+end
+
+function flip_with_image!(ellipse, image::Matrix, flipaxis=:x)
+    return flip_with_image!(ellipse, size(image), flipaxis)
+end
+
+flip_with_image(ellipse, args...) = flip_with_image!(copy(ellipse), args...)

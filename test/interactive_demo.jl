@@ -57,3 +57,20 @@ for a in 0:0.01:1
     notify(el2)
     sleep(0.04)
 end
+
+testim = zeros(200, 300) # create an asymmetric image
+testim[80:120, 100:140] .= 1.0
+fig, ax, hm = heatmap(testim; axis=(aspect=DataAspect(),))
+testel = Ellipse() # create an asymmetric ellipse
+EllipseGeometry.axes!(testel, (80, 40))
+EllipseGeometry.center!(testel, (120, 100))
+EllipseGeometry.angle!(testel, π / 6)
+lines!(testel; color=:red, linewidth=2, label="original")
+x_flipped_el = EllipseGeometry.flip_with_image(testel, testim, :x)
+lines!(x_flipped_el; color=:green, linewidth=2, label="x flipped")
+y_flipped_el = EllipseGeometry.flip_with_image(testel, testim, :y)
+lines!(y_flipped_el; color=:blue, linewidth=2, label="y flipped")
+EllipseGeometry.add_axes!.([testel, x_flipped_el, y_flipped_el])
+Legend(fig[1, 2], ax, "Ellipse transformations")
+
+fig
