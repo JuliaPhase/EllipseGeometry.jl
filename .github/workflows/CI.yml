@@ -3,62 +3,41 @@ on:
   push:
     branches:
       - main
-    tags: ['*']
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
   pull_request:
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
   workflow_dispatch:
 concurrency:
-  # Skip intermediate builds: always.
-  # Cancel intermediate builds: only if it is a pull request build.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 jobs:
   test:
-    name: Julia ${{ matrix.version }} - ${{ matrix.os }} - ${{ matrix.arch }} - ${{ github.event_name }}
+    name: Julia ${{ matrix.version }} - ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+    continue-on-error: ${{ matrix.experimental || false }}
     strategy:
       fail-fast: false
       matrix:
-        version:
-          - '1.9'
-          - 'nightly'
-        os:
-          - ubuntu-latest
-        arch:
-          - x64
+        include:
+          - {version: 'lts', os: ubuntu-latest}
+          - {version: '1', os: ubuntu-latest}
+          - {version: '1', os: windows-latest}
+          - {version: 'nightly', os: ubuntu-latest, experimental: true}
     steps:
-      - uses: actions/checkout@v4
-      - uses: julia-actions/setup-julia@v1
+      - uses: actions/checkout@v7
+      - uses: julia-actions/setup-julia@v3
         with:
           version: ${{ matrix.version }}
-          arch: ${{ matrix.arch }}
-      - uses: julia-actions/cache@v1
+      - uses: julia-actions/cache@v3
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
-  docs:
-    name: Documentation
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      statuses: write
-    steps:
-      - uses: actions/checkout@v4
-      - uses: julia-actions/setup-julia@v1
+      - uses: julia-actions/julia-processcoverage@v1
+      - uses: codecov/codecov-action@v7
         with:
-          version: '1'
-      - name: Configure doc environment
-        shell: julia --project=docs --color=yes {0}
-        run: |
-          using Pkg
-          Pkg.develop(PackageSpec(path=pwd()))
-          Pkg.instantiate()
-      - uses: julia-actions/julia-buildpkg@v1
-      - uses: julia-actions/julia-docdeploy@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run doctests
-        shell: julia --project=docs --color=yes {0}
-        run: |
-          using Documenter: DocMeta, doctest
-          using EllipseGeometry
-          DocMeta.setdocmeta!(EllipseGeometry, :DocTestSetup, :(using EllipseGeometry); recursive=true)
-          doctest(EllipseGeometry)
+          files: lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
